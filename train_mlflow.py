@@ -63,4 +63,13 @@ with mlflow.start_run(run_name=run_name):
             for epoch, value in enumerate(history.history[metric]):
                 mlflow.log_metric(metric, value, step=epoch)
 
-    mlflow.tensorflow.log_model(model, artifact_path="model", registered_model_name=run_name)
+    input_example = np.random.rand(1, 28 * 28).astype(np.float32)
+    signature = mlflow.models.infer_signature(input_example, model.predict(input_example))
+
+    mlflow.tensorflow.log_model(
+        model,
+        artifact_path="model",
+        registered_model_name=run_name,
+        input_example=input_example,
+        signature=signature
+    )
