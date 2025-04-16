@@ -1,0 +1,8 @@
+repo:
+  name: "chdmb/test"
+  data_files:
+    train: "mnist_train.csv"
+    test: "mnist_test.csv"
+  split:
+    train: "train"
+    test: "test"
